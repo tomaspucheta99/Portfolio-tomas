@@ -124,59 +124,37 @@
 
     /* ─── HERO ────────────────────────────────────────── */
     #hero {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 0 3rem 5rem;
+      padding: 0 3rem 4rem;
       position: relative;
       border-bottom: 1px solid var(--border);
     }
 
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      right: 3rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      writing-mode: vertical-rl;
-    }
-
-    .hero-scroll-hint::before {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 48px;
-      background: var(--border);
-    }
-
     .hero-tagline {
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-size: clamp(0.8rem, 1.2vw, 0.95rem);
       font-weight: 300;
       font-style: italic;
       color: var(--muted-light);
       letter-spacing: 0.06em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .hero-name {
-      font-size: clamp(4.5rem, 13vw, 11rem);
+      font-size: clamp(4rem, 12vw, 10.5rem);
       font-weight: 900;
       line-height: 0.88;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .hero-meta {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
@@ -200,23 +178,112 @@
       letter-spacing: 0.08em;
     }
 
-    /* ─── SECTION BASE ────────────────────────────────── */
-    section {
-      padding: 6rem 3rem;
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: var(--border);
+    }
+
+    /* ─── FEATURED VIDEO ──────────────────────────────── */
+    #featured {
+      padding: 0;
+      position: relative;
+    }
+
+    .featured-label {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .featured-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--text);
+      padding: 0.25rem 0.6rem;
+    }
+
+    .featured-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-light);
+    }
+
+    .featured-line { flex: 1; height: 1px; background: var(--border); }
+
+    .featured-video-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      position: relative;
+    }
+
+    .featured-video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .featured-meta {
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .featured-project-name {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .featured-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    /* ─── SECTION HEADER ─────────────────────────────── */
     .section-header {
       display: flex;
       align-items: center;
       gap: 1.25rem;
-      margin-bottom: 5rem;
+      padding: 2rem 3rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-num {
       font-size: 0.65rem;
       color: var(--muted);
       font-weight: 400;
-      letter-spacing: 0.05em;
     }
 
     .section-title {
@@ -226,198 +293,161 @@
       text-transform: uppercase;
     }
 
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
 
-    /* ─── PROJECTS ────────────────────────────────────── */
-    #trabajos { border-bottom: 1px solid var(--border); }
+    /* ─── PROJECTS GRID ──────────────────────────────── */
+    #trabajos { padding: 0; }
 
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .project {
+    .projects-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid var(--border);
-      padding: 4rem 0;
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .project:last-child {
+    .grid-card {
+      position: relative;
+      border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
-    .project-media {
-      padding-right: 3rem;
-    }
+    .grid-card:nth-child(even) { border-right: none; }
 
-    .project:nth-child(even) .project-media {
-      order: 2;
-      padding-right: 0;
-      padding-left: 3rem;
-    }
-
-    .project:nth-child(even) .project-info {
-      order: 1;
-    }
-
-    .project-embed {
+    .grid-card-video {
       aspect-ratio: 16 / 9;
       background: var(--surface);
-      border: 1px solid var(--border);
       overflow: hidden;
+      position: relative;
     }
 
-    .project-embed iframe {
+    .grid-card-video iframe {
       width: 100%;
       height: 100%;
       border: none;
       display: block;
     }
 
-    .project-link-thumb {
+    /* Cards without embeddable video */
+    .grid-card-thumb {
       aspect-ratio: 16 / 9;
       background: var(--surface);
-      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s;
+      transition: background 0.3s;
     }
 
-    .project-link-thumb:hover { border-color: rgba(255,255,255,0.2); }
+    .grid-card-thumb:hover { background: #1a1a1a; }
 
-    .project-link-thumb:hover .thumb-play { transform: scale(1.1); }
+    .grid-card-thumb:hover .play-ring { border-color: rgba(255,255,255,0.4); transform: scale(1.05); }
 
-    .thumb-label {
+    .thumb-source {
       position: absolute;
       top: 1rem;
       left: 1rem;
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      background: var(--bg);
-      padding: 0.3rem 0.6rem;
       border: 1px solid var(--border);
+      padding: 0.25rem 0.5rem;
     }
 
-    .thumb-play {
-      width: 56px;
-      height: 56px;
-      border: 1px solid rgba(255,255,255,0.15);
+    .play-ring {
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s, border-color 0.3s;
+      transition: border-color 0.3s, transform 0.3s;
     }
 
-    .thumb-play svg {
-      width: 18px;
-      height: 18px;
+    .play-ring svg {
+      width: 16px;
+      height: 16px;
       fill: white;
       margin-left: 3px;
     }
 
-    .project-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 3rem;
+    .grid-card-info {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border);
     }
 
-    .project:nth-child(even) .project-info {
-      padding-left: 0;
-      padding-right: 3rem;
-    }
-
-    .project-num {
-      font-size: 0.65rem;
+    .grid-card-num {
+      font-size: 0.6rem;
       color: var(--muted);
-      letter-spacing: 0.06em;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.5rem;
     }
 
-    .project-name {
-      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    .grid-card-name {
+      font-size: 1rem;
       font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
     }
 
-    .project-tags {
+    .grid-card-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
     }
 
+    .grid-card-desc {
+      font-size: 0.8rem;
+      color: var(--muted-light);
+      line-height: 1.65;
+    }
+
+    .grid-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      margin-top: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.25rem;
+      transition: border-color 0.2s;
+    }
+
+    .grid-card-cta:hover { border-color: var(--text); }
+
+    /* Tags shared style */
     .tag {
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 0.3rem 0.65rem;
+      padding: 0.25rem 0.55rem;
       border: 1px solid var(--border);
       color: var(--muted-light);
     }
 
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--muted-light);
-      line-height: 1.75;
-      margin-bottom: 2rem;
-      max-width: 38ch;
-    }
-
-    .project-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-      position: relative;
-      width: fit-content;
-    }
-
-    .project-cta::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-      transition: background 0.2s;
-    }
-
-    .project-cta:hover::after { background: var(--text); }
-
     /* ─── EQUIPMENT ───────────────────────────────────── */
     #equipo {
       background: var(--surface);
+      padding: 0;
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
     .equipment-table {
       width: 100%;
       border-collapse: collapse;
+      padding: 0 3rem;
+      display: block;
+      padding: 2rem 3rem 3rem;
     }
 
     .equipment-table tr {
@@ -428,7 +458,7 @@
     .equipment-table tr:hover { background: rgba(255,255,255,0.02); }
 
     .equipment-table td {
-      padding: 1.1rem 0;
+      padding: 1rem 0;
       font-size: 0.85rem;
     }
 
@@ -445,19 +475,20 @@
 
     /* ─── CONTACT ─────────────────────────────────────── */
     #contacto {
-      min-height: 60vh;
+      min-height: 55vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 6rem 3rem;
     }
 
     .contact-heading {
-      font-size: clamp(3rem, 9vw, 8rem);
+      font-size: clamp(3.5rem, 10vw, 9rem);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: -0.03em;
-      line-height: 0.92;
-      margin-bottom: 3.5rem;
+      line-height: 0.9;
+      margin-bottom: 3rem;
     }
 
     .contact-sub {
@@ -529,40 +560,31 @@
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 1.25rem 1.5rem; }
-
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
 
-      #hero { padding: 0 1.5rem 4.5rem; }
+      #hero { padding: 0 1.5rem 4rem; }
+      .hero-scroll { display: none; }
 
-      section { padding: 4rem 1.5rem; }
+      .featured-label { padding: 1.5rem; }
+      .featured-meta { padding: 1.5rem; }
+      .section-header { padding: 1.5rem; }
 
-      .project {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 3rem 0;
-      }
+      .projects-grid { grid-template-columns: 1fr; }
+      .grid-card { border-right: none; }
+      .grid-card:nth-child(even) { border-right: none; }
+      .grid-card-info { padding: 1.25rem 1.5rem; }
 
-      .project-media { padding-right: 0 !important; padding-left: 0 !important; }
-      .project:nth-child(even) .project-media { order: 1; }
-      .project:nth-child(even) .project-info { order: 2; }
-
-      .project-info { padding-left: 0 !important; padding-right: 0 !important; }
-
-      .project-desc { max-width: 100%; }
-
+      .equipment-table { padding: 1.5rem; }
       .equipment-table td:first-child { width: 40%; }
 
-      footer {
-        flex-direction: column;
-        gap: 0.75rem;
-        text-align: center;
-      }
+      #contacto { padding: 4rem 1.5rem; }
+
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
 
     @media (max-width: 480px) {
-      .hero-name { letter-spacing: -0.025em; }
-      .hero-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .hero-meta { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
       .hero-dot { display: none; }
       .contact-btns { flex-direction: column; }
       .btn { justify-content: center; }
@@ -599,8 +621,38 @@
     <span class="hero-dot"></span>
     <span class="hero-skills">Dirección · Guionaje · Producción · Edición · Colorización</span>
   </div>
-  <div class="hero-scroll-hint">Scroll</div>
+  <div class="hero-scroll">Scroll</div>
 </section>
+
+<!-- ─── FEATURED VIDEO ──────────────────────────────── -->
+<div id="featured">
+  <div class="featured-label">
+    <span class="featured-badge">Último trabajo</span>
+    <span class="featured-title">Video Institucional — NPK Tech</span>
+    <div class="featured-line"></div>
+  </div>
+
+  <div class="featured-video-wrap">
+    <iframe
+      src="https://drive.google.com/file/d/1cSuaC4moFdsIqhhrCSUw_DJCoqtEuESm/preview"
+      allow="autoplay"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div class="featured-meta">
+    <h2 class="featured-project-name">Video Institucional — NPK Tech</h2>
+    <div class="featured-tags">
+      <span class="tag">Preproducción</span>
+      <span class="tag">Producción</span>
+      <span class="tag">Dirección</span>
+      <span class="tag">Montaje</span>
+      <span class="tag">Edición</span>
+      <span class="tag">Colorización</span>
+    </div>
+  </div>
+</div>
 
 <!-- ─── TRABAJOS ─────────────────────────────────────── -->
 <section id="trabajos">
@@ -610,151 +662,101 @@
     <div class="section-line"></div>
   </div>
 
-  <div class="projects-list">
+  <div class="projects-grid">
 
-    <!-- 01 · NPK -->
-    <div class="project">
-      <div class="project-media">
-        <div class="project-embed">
-          <iframe
-            src="https://drive.google.com/file/d/1qa7GuCGQbjytMh9bgvb7pvRTvBvDA4bT/preview"
-            allow="autoplay"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
-        </div>
+    <!-- 01 · NPK Institucional -->
+    <div class="grid-card">
+      <div class="grid-card-video">
+        <iframe src="https://drive.google.com/file/d/1qa7GuCGQbjytMh9bgvb7pvRTvBvDA4bT/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
       </div>
-      <div class="project-info">
-        <p class="project-num">01 / 06</p>
-        <h3 class="project-name">NPK — Video Institucional</h3>
-        <div class="project-tags">
+      <div class="grid-card-info">
+        <p class="grid-card-num">01 / 05</p>
+        <h3 class="grid-card-name">NPK — Video Institucional</h3>
+        <div class="grid-card-tags">
           <span class="tag">Producción Completa</span>
           <span class="tag">Dirección</span>
           <span class="tag">Edición</span>
         </div>
-        <p class="project-desc">Video institucional para empresa cannabica NPK. Producción, dirección y edición completa.</p>
+        <p class="grid-card-desc">Video institucional para empresa cannabica NPK. Producción, dirección y edición completa.</p>
       </div>
     </div>
 
     <!-- 02 · Videoclip Musical -->
-    <div class="project">
-      <div class="project-media">
-        <div class="project-embed">
-          <iframe
-            src="https://drive.google.com/file/d/13rHDU1pTnhM_8nC3DdICzOc8I8IcY02j/preview"
-            allow="autoplay"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
-        </div>
+    <div class="grid-card">
+      <div class="grid-card-video">
+        <iframe src="https://drive.google.com/file/d/13rHDU1pTnhM_8nC3DdICzOc8I8IcY02j/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
       </div>
-      <div class="project-info">
-        <p class="project-num">02 / 06</p>
-        <h3 class="project-name">Videoclip Musical · Artista de Córdoba</h3>
-        <div class="project-tags">
+      <div class="grid-card-info">
+        <p class="grid-card-num">02 / 05</p>
+        <h3 class="grid-card-name">Videoclip Musical · Artista de Córdoba</h3>
+        <div class="grid-card-tags">
           <span class="tag">Producción Completa</span>
           <span class="tag">Grabación</span>
           <span class="tag">Dirección</span>
           <span class="tag">Edición</span>
         </div>
-        <p class="project-desc">Producción audiovisual completa: preproducción, grabación en locación y edición final.</p>
+        <p class="grid-card-desc">Producción audiovisual completa: preproducción, grabación en locación y edición final.</p>
       </div>
     </div>
 
     <!-- 03 · Disorder AR -->
-    <div class="project">
-      <div class="project-media">
-        <a class="project-link-thumb" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">
-          <span class="thumb-label">Carpeta de proyecto</span>
-          <div class="thumb-play">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </a>
-      </div>
-      <div class="project-info">
-        <p class="project-num">03 / 06</p>
-        <h3 class="project-name">Cobertura Multicámara — Disorder AR</h3>
-        <div class="project-tags">
+    <div class="grid-card">
+      <a class="grid-card-thumb" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">
+        <span class="thumb-source">Carpeta de proyecto</span>
+        <div class="play-ring">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </a>
+      <div class="grid-card-info">
+        <p class="grid-card-num">03 / 05</p>
+        <h3 class="grid-card-name">Cobertura Multicámara — Disorder AR</h3>
+        <div class="grid-card-tags">
           <span class="tag">Cámara FOV</span>
           <span class="tag">Cámara en Cabina</span>
           <span class="tag">Edición</span>
           <span class="tag">Colorización</span>
         </div>
-        <p class="project-desc">Cobertura audiovisual completa del evento de Disorder AR. Artista internacional: Airod Music (Francia). Montaje multicámara, edición y colorización final.</p>
-        <a class="project-cta" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">Ver proyecto →</a>
+        <p class="grid-card-desc">Cobertura audiovisual del evento de Disorder AR. Artista internacional: Airod Music (Francia). Montaje multicámara, edición y colorización final.</p>
+        <a class="grid-card-cta" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">Ver proyecto →</a>
       </div>
     </div>
 
     <!-- 04 · Recap & Colorización -->
-    <div class="project">
-      <div class="project-media">
-        <a class="project-link-thumb" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">
-          <span class="thumb-label">Instagram</span>
-          <div class="thumb-play">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </a>
-      </div>
-      <div class="project-info">
-        <p class="project-num">04 / 06</p>
-        <h3 class="project-name">Recap & Colorización</h3>
-        <div class="project-tags">
+    <div class="grid-card">
+      <a class="grid-card-thumb" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">
+        <span class="thumb-source">Instagram</span>
+        <div class="play-ring">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </a>
+      <div class="grid-card-info">
+        <p class="grid-card-num">04 / 05</p>
+        <h3 class="grid-card-name">Recap & Colorización</h3>
+        <div class="grid-card-tags">
           <span class="tag">Colorización</span>
           <span class="tag">Edición</span>
         </div>
-        <p class="project-desc">Recap del rodaje con trabajo de colorización cinematográfica.</p>
-        <a class="project-cta" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">Ver en Instagram →</a>
+        <p class="grid-card-desc">Recap del rodaje con trabajo de colorización cinematográfica.</p>
+        <a class="grid-card-cta" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">Ver en Instagram →</a>
       </div>
     </div>
 
     <!-- 05 · Sanmaja Studio -->
-    <div class="project">
-      <div class="project-media">
-        <div class="project-embed">
-          <iframe
-            src="https://drive.google.com/file/d/1hwRqheGFUEHhA88phA4fJHX6gcmM82NU/preview"
-            allow="autoplay"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
+    <div class="grid-card" style="grid-column: 1 / -1; border-right: none;">
+      <div style="max-width: 50%; margin: 0 auto;">
+        <div class="grid-card-video">
+          <iframe src="https://drive.google.com/file/d/1hwRqheGFUEHhA88phA4fJHX6gcmM82NU/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
-      <div class="project-info">
-        <p class="project-num">05 / 06</p>
-        <h3 class="project-name">Proyecto Musical — Sanmaja Studio</h3>
-        <div class="project-tags">
+      <div class="grid-card-info" style="max-width: 50%; margin: 0 auto;">
+        <p class="grid-card-num">05 / 05</p>
+        <h3 class="grid-card-name">Proyecto Musical — Sanmaja Studio</h3>
+        <div class="grid-card-tags">
           <span class="tag">Producción</span>
           <span class="tag">Dirección</span>
           <span class="tag">Edición</span>
         </div>
-        <p class="project-desc">Video musical grabado en locación y en Sanmaja Studio, Córdoba.</p>
-      </div>
-    </div>
-
-    <!-- 06 · NPK Tech -->
-    <div class="project">
-      <div class="project-media">
-        <div class="project-embed">
-          <iframe
-            src="https://drive.google.com/file/d/1cSuaC4moFdsIqhhrCSUw_DJCoqtEuESm/preview"
-            allow="autoplay"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
-        </div>
-      </div>
-      <div class="project-info">
-        <p class="project-num">06 / 06</p>
-        <h3 class="project-name">Video Institucional — NPK Tech</h3>
-        <div class="project-tags">
-          <span class="tag">Preproducción</span>
-          <span class="tag">Producción</span>
-          <span class="tag">Dirección</span>
-          <span class="tag">Montaje</span>
-          <span class="tag">Edición</span>
-          <span class="tag">Colorización</span>
-        </div>
-        <p class="project-desc">Pieza institucional para NPK Tech que presenta su nueva unidad de negocio: procesos, instalaciones y propuesta de valor. Producción completa desde la preproducción hasta la colorización final.</p>
+        <p class="grid-card-desc">Video musical grabado en locación y en Sanmaja Studio, Córdoba.</p>
       </div>
     </div>
 
@@ -787,7 +789,7 @@
 
 <!-- ─── CONTACTO ──────────────────────────────────────── -->
 <section id="contacto">
-  <div class="section-header">
+  <div class="section-header" style="margin-bottom: 3rem; padding: 0; border: none;">
     <span class="section-num">03</span>
     <h2 class="section-title">Contacto</h2>
     <div class="section-line"></div>
@@ -822,13 +824,11 @@
 </footer>
 
 <script>
-  // Nav scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // Mobile menu
   const toggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('navMobile');
 
