@@ -557,6 +557,56 @@
       letter-spacing: 0.06em;
     }
 
+    /* ─── VERTICAL VIDEOS ────────────────────────────── */
+    .grid-row-vertical {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 4rem;
+      padding: 4rem 3rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .grid-card-v {
+      display: flex;
+      flex-direction: column;
+      width: 260px;
+    }
+
+    .grid-card-v-video {
+      aspect-ratio: 9 / 16;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .grid-card-v-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .grid-card-v-info {
+      padding: 1.25rem 0;
+    }
+
+    .grid-card-v-num {
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .grid-card-v-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.65rem;
+      line-height: 1.2;
+    }
+
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 1.25rem 1.5rem; }
@@ -662,41 +712,42 @@
 
   <div class="projects-grid">
 
-    <!-- 01 · NPK Institucional -->
-    <div class="grid-card">
-      <div class="grid-card-video">
-        <iframe src="https://drive.google.com/file/d/1qa7GuCGQbjytMh9bgvb7pvRTvBvDA4bT/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="grid-card-info">
-        <p class="grid-card-num">01 / 05</p>
-        <h3 class="grid-card-name">NPK — Video Institucional</h3>
-        <div class="grid-card-tags">
-          <span class="tag">Producción Completa</span>
-          <span class="tag">Dirección</span>
-          <span class="tag">Edición</span>
-        </div>
-        <p class="grid-card-desc">Video institucional para empresa cannabica NPK. Producción, dirección y edición completa.</p>
-      </div>
-    </div>
+    <!-- 01-02 · NPK (Vertical) -->
+    <div class="grid-row-vertical">
 
-    <!-- 02 · NPK Tech -->
-    <div class="grid-card">
-      <div class="grid-card-video">
-        <iframe src="https://drive.google.com/file/d/1cSuaC4moFdsIqhhrCSUw_DJCoqtEuESm/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="grid-card-info">
-        <p class="grid-card-num">02 / 05</p>
-        <h3 class="grid-card-name">Video Institucional — NPK Tech</h3>
-        <div class="grid-card-tags">
-          <span class="tag">Preproducción</span>
-          <span class="tag">Producción</span>
-          <span class="tag">Dirección</span>
-          <span class="tag">Montaje</span>
-          <span class="tag">Edición</span>
-          <span class="tag">Colorización</span>
+      <div class="grid-card-v">
+        <div class="grid-card-v-video">
+          <iframe src="https://www.youtube.com/embed/JWwuJdj74tM" allowfullscreen loading="lazy"></iframe>
         </div>
-        <p class="grid-card-desc">Pieza institucional para NPK Tech que presenta su nueva unidad de negocio: procesos, instalaciones y propuesta de valor.</p>
+        <div class="grid-card-v-info">
+          <p class="grid-card-v-num">01 / 05</p>
+          <h3 class="grid-card-v-name">NPK — Video Institucional</h3>
+          <div class="grid-card-tags">
+            <span class="tag">Producción Completa</span>
+            <span class="tag">Dirección</span>
+            <span class="tag">Edición</span>
+          </div>
+        </div>
       </div>
+
+      <div class="grid-card-v">
+        <div class="grid-card-v-video">
+          <iframe src="https://www.youtube.com/embed/QJm4nDdgfB0" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="grid-card-v-info">
+          <p class="grid-card-v-num">02 / 05</p>
+          <h3 class="grid-card-v-name">Video Institucional — NPK Tech</h3>
+          <div class="grid-card-tags">
+            <span class="tag">Preproducción</span>
+            <span class="tag">Producción</span>
+            <span class="tag">Dirección</span>
+            <span class="tag">Montaje</span>
+            <span class="tag">Edición</span>
+            <span class="tag">Colorización</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- 03 · Disorder AR -->
