@@ -650,17 +650,20 @@
     #colorizacion { padding: 0; border-bottom: 1px solid var(--border); }
 
     .color-process-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      padding: 4rem 3rem;
       border-bottom: 1px solid var(--border);
     }
 
     .color-process-video {
+      width: 70%;
       aspect-ratio: 16 / 9;
       background: var(--surface);
       overflow: hidden;
+      border: 1px solid var(--border);
     }
 
     .color-process-video iframe {
@@ -668,6 +671,10 @@
       height: 100%;
       border: none;
       display: block;
+    }
+
+    @media (max-width: 900px) {
+      .color-process-video { width: 100%; }
     }
 
     .color-process-info {
@@ -708,30 +715,19 @@
       touch-action: none;
     }
 
-    .ba-after {
+    .ba-after,
+    .ba-before {
       position: absolute;
-      top: 0; left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      pointer-events: none;
     }
 
-    .ba-before-wrap {
-      position: absolute;
-      top: 0; left: 0;
-      height: 100%;
-      width: 50%;
-      overflow: hidden;
-    }
-
-    .ba-before-wrap img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 200%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .ba-before {
+      clip-path: inset(0 50% 0 0);
     }
 
     .ba-divider {
@@ -750,8 +746,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: white;
       display: flex;
@@ -765,7 +761,9 @@
       height: 16px;
       fill: none;
       stroke: #000;
-      stroke-width: 2;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .ba-caption {
@@ -1026,9 +1024,7 @@
     <div class="ba-block">
       <div class="ba-slider">
         <img class="ba-after" src="https://drive.google.com/thumbnail?id=1B6iDZCOybOBtMocbShRkz7fULh-WxLqU&sz=w1600" alt="Después" />
-        <div class="ba-before-wrap">
-          <img src="https://drive.google.com/thumbnail?id=1xyfNfga4w3zT9x9SWsWAX2bPlQxj8tla&sz=w1600" alt="Antes" />
-        </div>
+        <img class="ba-before" src="https://drive.google.com/thumbnail?id=1xyfNfga4w3zT9x9SWsWAX2bPlQxj8tla&sz=w1600" alt="Antes" />
         <div class="ba-divider">
           <div class="ba-handle">
             <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6" transform="translate(6,0)"/></svg>
@@ -1044,9 +1040,7 @@
     <div class="ba-block">
       <div class="ba-slider">
         <img class="ba-after" src="https://drive.google.com/thumbnail?id=1v13PtA2Sb49GctJZuZWa8PQVLB7mAx19&sz=w1600" alt="Después" />
-        <div class="ba-before-wrap">
-          <img src="https://drive.google.com/thumbnail?id=1tdciWDYphq-ReIZ3bYzWXJHRizTrGnT_&sz=w1600" alt="Antes" />
-        </div>
+        <img class="ba-before" src="https://drive.google.com/thumbnail?id=1tdciWDYphq-ReIZ3bYzWXJHRizTrGnT_&sz=w1600" alt="Antes" />
         <div class="ba-divider">
           <div class="ba-handle">
             <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6" transform="translate(6,0)"/></svg>
@@ -1137,27 +1131,25 @@
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
-  // Before/After sliders
+  // Before/After sliders (clip-path approach)
   document.querySelectorAll('.ba-slider').forEach(slider => {
-    const beforeWrap = slider.querySelector('.ba-before-wrap');
-    const divider    = slider.querySelector('.ba-divider');
-    let dragging = false;
+    const before  = slider.querySelector('.ba-before');
+    const divider = slider.querySelector('.ba-divider');
+    let dragging  = false;
 
     function setPos(clientX) {
       const rect = slider.getBoundingClientRect();
-      let pct = Math.max(0, Math.min(100, (clientX - rect.left) / rect.width * 100));
-      beforeWrap.style.width = pct + '%';
+      const pct  = Math.max(0, Math.min(100, (clientX - rect.left) / rect.width * 100));
+      before.style.clipPath  = `inset(0 ${100 - pct}% 0 0)`;
       divider.style.left     = pct + '%';
     }
 
-    slider.addEventListener('mousedown',  e => { dragging = true; setPos(e.clientX); });
+    slider.addEventListener('mousedown',  e => { dragging = true; setPos(e.clientX); e.preventDefault(); });
     slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
     window.addEventListener('mousemove',  e => { if (dragging) setPos(e.clientX); });
     window.addEventListener('touchmove',  e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
     window.addEventListener('mouseup',    () => dragging = false);
     window.addEventListener('touchend',   () => dragging = false);
-
-    setPos(slider.getBoundingClientRect().left + slider.getBoundingClientRect().width / 2);
   });
 
   document.querySelectorAll('.nav-mobile-link').forEach(link => {
