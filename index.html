@@ -646,21 +646,56 @@
       text-align: center;
     }
 
-    /* ─── BEFORE/AFTER SLIDER ────────────────────────── */
+    /* ─── COLORIZACIÓN ────────────────────────────────── */
     #colorizacion { padding: 0; border-bottom: 1px solid var(--border); }
 
-    .color-process {
+    .color-process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
       border-bottom: 1px solid var(--border);
     }
 
+    .color-process-video {
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .color-process-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .color-process-info {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .color-process-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-light);
+    }
+
+    /* ─── BEFORE/AFTER SLIDER ────────────────────────── */
     .color-sliders-wrap {
       padding: 4rem 3rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 3rem;
     }
 
-    .ba-block { display: flex; flex-direction: column; gap: 1rem; }
+    .ba-block { display: flex; flex-direction: column; gap: 0; }
 
     .ba-slider {
       position: relative;
@@ -670,28 +705,33 @@
       cursor: col-resize;
       user-select: none;
       border: 1px solid var(--border);
+      touch-action: none;
     }
 
     .ba-after {
       position: absolute;
-      inset: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .ba-before-wrap {
       position: absolute;
-      inset: 0;
+      top: 0; left: 0;
+      height: 100%;
       width: 50%;
       overflow: hidden;
     }
 
     .ba-before-wrap img {
-      width: 100%;
+      position: absolute;
+      top: 0; left: 0;
+      width: 200%;
       height: 100%;
       object-fit: cover;
-      min-width: 200%;
+      display: block;
     }
 
     .ba-divider {
@@ -702,6 +742,7 @@
       background: white;
       transform: translateX(-50%);
       pointer-events: none;
+      z-index: 3;
     }
 
     .ba-handle {
@@ -716,34 +757,36 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
     }
 
     .ba-handle svg {
-      width: 14px;
-      height: 14px;
-      fill: #000;
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: #000;
+      stroke-width: 2;
     }
 
-    .ba-label {
-      position: absolute;
-      bottom: 0.75rem;
-      font-size: 0.55rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+    .ba-caption {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ba-caption span {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(4px);
-      color: white;
-      pointer-events: none;
+      color: var(--muted-light);
     }
-
-    .ba-label-before { left: 0.75rem; }
-    .ba-label-after  { right: 0.75rem; }
 
     @media (max-width: 900px) {
       .color-sliders-wrap { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .color-process-grid { grid-template-columns: 1fr; }
+      .color-process-info { padding: 1.5rem; }
     }
 
     /* ─── RESPONSIVE ──────────────────────────────────── */
@@ -956,32 +999,24 @@
     <div class="section-line"></div>
   </div>
 
-  <!-- Proceso: 3 videos verticales -->
-  <div class="grid-row-project color-process">
-    <div class="grid-row-project-clips">
-      <div class="grid-card-v-sm">
-        <div class="grid-card-v-video">
-          <iframe src="https://www.youtube.com/embed/uWMmD8HQLZA" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
-      <div class="grid-card-v-sm">
-        <div class="grid-card-v-video">
-          <iframe src="https://www.youtube.com/embed/QW1ITM91P9Y" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
-      <div class="grid-card-v-sm">
-        <div class="grid-card-v-video">
-          <iframe src="https://www.youtube.com/embed/EuXaNZM8QJA" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
+  <!-- Proceso: 3 videos horizontales -->
+  <div class="color-process-grid">
+    <div class="color-process-video">
+      <iframe src="https://www.youtube.com/embed/uWMmD8HQLZA" allowfullscreen loading="lazy"></iframe>
     </div>
-    <div class="grid-row-project-info">
-      <h3 class="grid-card-v-name">Proceso de Colorización</h3>
-      <div class="grid-card-tags" style="justify-content: center;">
-        <span class="tag">S-Log3</span>
-        <span class="tag">DaVinci Resolve</span>
-        <span class="tag">Color Grading</span>
-      </div>
+    <div class="color-process-video">
+      <iframe src="https://www.youtube.com/embed/QW1ITM91P9Y" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="color-process-video">
+      <iframe src="https://www.youtube.com/embed/EuXaNZM8QJA" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+  <div class="color-process-info">
+    <span class="color-process-label">Proceso de Colorización</span>
+    <div class="grid-card-tags">
+      <span class="tag">S-Log3</span>
+      <span class="tag">DaVinci Resolve</span>
+      <span class="tag">Color Grading</span>
     </div>
   </div>
 
@@ -989,34 +1024,38 @@
   <div class="color-sliders-wrap">
 
     <div class="ba-block">
-      <div class="ba-slider" id="baSlider1">
-        <img class="ba-after" src="https://drive.google.com/uc?export=view&id=1B6iDZCOybOBtMocbShRkz7fULh-WxLqU" alt="Después" />
-        <div class="ba-before-wrap" id="baBefore1">
-          <img src="https://drive.google.com/uc?export=view&id=1xyfNfga4w3zT9x9SWsWAX2bPlQxj8tla" alt="Antes" />
+      <div class="ba-slider">
+        <img class="ba-after" src="https://drive.google.com/thumbnail?id=1B6iDZCOybOBtMocbShRkz7fULh-WxLqU&sz=w1600" alt="Después" />
+        <div class="ba-before-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1xyfNfga4w3zT9x9SWsWAX2bPlQxj8tla&sz=w1600" alt="Antes" />
         </div>
-        <div class="ba-divider" id="baDivider1">
+        <div class="ba-divider">
           <div class="ba-handle">
-            <svg viewBox="0 0 24 24"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6" transform="translate(6,0)"/></svg>
           </div>
         </div>
-        <span class="ba-label ba-label-before">Antes</span>
-        <span class="ba-label ba-label-after">Después</span>
+      </div>
+      <div class="ba-caption">
+        <span>← Antes</span>
+        <span>Después →</span>
       </div>
     </div>
 
     <div class="ba-block">
-      <div class="ba-slider" id="baSlider2">
-        <img class="ba-after" src="https://drive.google.com/uc?export=view&id=1v13PtA2Sb49GctJZuZWa8PQVLB7mAx19" alt="Después" />
-        <div class="ba-before-wrap" id="baBefore2">
-          <img src="https://drive.google.com/uc?export=view&id=1tdciWDYphq-ReIZ3bYzWXJHRizTrGnT_" alt="Antes" />
+      <div class="ba-slider">
+        <img class="ba-after" src="https://drive.google.com/thumbnail?id=1v13PtA2Sb49GctJZuZWa8PQVLB7mAx19&sz=w1600" alt="Después" />
+        <div class="ba-before-wrap">
+          <img src="https://drive.google.com/thumbnail?id=1tdciWDYphq-ReIZ3bYzWXJHRizTrGnT_&sz=w1600" alt="Antes" />
         </div>
-        <div class="ba-divider" id="baDivider2">
+        <div class="ba-divider">
           <div class="ba-handle">
-            <svg viewBox="0 0 24 24"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6" transform="translate(6,0)"/></svg>
           </div>
         </div>
-        <span class="ba-label ba-label-before">Antes</span>
-        <span class="ba-label ba-label-after">Después</span>
+      </div>
+      <div class="ba-caption">
+        <span>← Antes</span>
+        <span>Después →</span>
       </div>
     </div>
 
