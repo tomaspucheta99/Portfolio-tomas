@@ -646,6 +646,106 @@
       text-align: center;
     }
 
+    /* ─── BEFORE/AFTER SLIDER ────────────────────────── */
+    #colorizacion { padding: 0; border-bottom: 1px solid var(--border); }
+
+    .color-process {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .color-sliders-wrap {
+      padding: 4rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .ba-block { display: flex; flex-direction: column; gap: 1rem; }
+
+    .ba-slider {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      cursor: col-resize;
+      user-select: none;
+      border: 1px solid var(--border);
+    }
+
+    .ba-after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ba-before-wrap {
+      position: absolute;
+      inset: 0;
+      width: 50%;
+      overflow: hidden;
+    }
+
+    .ba-before-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-width: 200%;
+    }
+
+    .ba-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: white;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    }
+
+    .ba-handle svg {
+      width: 14px;
+      height: 14px;
+      fill: #000;
+    }
+
+    .ba-label {
+      position: absolute;
+      bottom: 0.75rem;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      color: white;
+      pointer-events: none;
+    }
+
+    .ba-label-before { left: 0.75rem; }
+    .ba-label-after  { right: 0.75rem; }
+
+    @media (max-width: 900px) {
+      .color-sliders-wrap { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    }
+
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 1.25rem 1.5rem; }
@@ -687,6 +787,7 @@
   <a href="#hero" class="nav-logo">Tomas Pucheta</a>
   <ul class="nav-links">
     <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#colorizacion">Colorización</a></li>
     <li><a href="#equipo">Equipo</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -697,6 +798,7 @@
 
 <div class="nav-mobile" id="navMobile">
   <a href="#trabajos" class="nav-mobile-link">Trabajos</a>
+  <a href="#colorizacion" class="nav-mobile-link">Colorización</a>
   <a href="#equipo" class="nav-mobile-link">Equipo</a>
   <a href="#contacto" class="nav-mobile-link">Contacto</a>
 </div>
@@ -823,29 +925,7 @@
       </div>
     </div>
 
-    <!-- 04 · Recap & Colorización -->
-    <div class="grid-card" style="grid-column: 1 / -1; border-right: none;">
-      <div style="max-width: 50%; margin: 0 auto;">
-        <a class="grid-card-thumb" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">
-          <span class="thumb-source">Instagram</span>
-          <div class="play-ring">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </a>
-      </div>
-      <div class="grid-card-info" style="max-width: 50%; margin: 0 auto;">
-        <p class="grid-card-num">04 / 05</p>
-        <h3 class="grid-card-name">Recap & Colorización</h3>
-        <div class="grid-card-tags">
-          <span class="tag">Colorización</span>
-          <span class="tag">Edición</span>
-        </div>
-        <p class="grid-card-desc">Recap del rodaje con trabajo de colorización cinematográfica.</p>
-        <a class="grid-card-cta" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">Ver en Instagram →</a>
-      </div>
-    </div>
-
-    <!-- 05 · Sanmaja Studio -->
+    <!-- 04 · Sanmaja Studio -->
     <div class="grid-card" style="grid-column: 1 / -1; border-right: none;">
       <div style="max-width: 50%; margin: 0 auto;">
         <div class="grid-card-video">
@@ -853,7 +933,7 @@
         </div>
       </div>
       <div class="grid-card-info" style="max-width: 50%; margin: 0 auto;">
-        <p class="grid-card-num">05 / 05</p>
+        <p class="grid-card-num">04 / 04</p>
         <h3 class="grid-card-name">Proyecto Musical — Sanmaja Studio</h3>
         <div class="grid-card-tags">
           <span class="tag">Producción</span>
@@ -867,10 +947,86 @@
   </div>
 </section>
 
+<!-- ─── COLORIZACIÓN ─────────────────────────────────── -->
+<section id="colorizacion">
+
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Colorización</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Proceso: 3 videos verticales -->
+  <div class="grid-row-project color-process">
+    <div class="grid-row-project-clips">
+      <div class="grid-card-v-sm">
+        <div class="grid-card-v-video">
+          <iframe src="https://www.youtube.com/embed/uWMmD8HQLZA" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="grid-card-v-sm">
+        <div class="grid-card-v-video">
+          <iframe src="https://www.youtube.com/embed/QW1ITM91P9Y" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="grid-card-v-sm">
+        <div class="grid-card-v-video">
+          <iframe src="https://www.youtube.com/embed/EuXaNZM8QJA" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="grid-row-project-info">
+      <h3 class="grid-card-v-name">Proceso de Colorización</h3>
+      <div class="grid-card-tags" style="justify-content: center;">
+        <span class="tag">S-Log3</span>
+        <span class="tag">DaVinci Resolve</span>
+        <span class="tag">Color Grading</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sliders antes / después -->
+  <div class="color-sliders-wrap">
+
+    <div class="ba-block">
+      <div class="ba-slider" id="baSlider1">
+        <img class="ba-after" src="https://drive.google.com/uc?export=view&id=1B6iDZCOybOBtMocbShRkz7fULh-WxLqU" alt="Después" />
+        <div class="ba-before-wrap" id="baBefore1">
+          <img src="https://drive.google.com/uc?export=view&id=1xyfNfga4w3zT9x9SWsWAX2bPlQxj8tla" alt="Antes" />
+        </div>
+        <div class="ba-divider" id="baDivider1">
+          <div class="ba-handle">
+            <svg viewBox="0 0 24 24"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+          </div>
+        </div>
+        <span class="ba-label ba-label-before">Antes</span>
+        <span class="ba-label ba-label-after">Después</span>
+      </div>
+    </div>
+
+    <div class="ba-block">
+      <div class="ba-slider" id="baSlider2">
+        <img class="ba-after" src="https://drive.google.com/uc?export=view&id=1v13PtA2Sb49GctJZuZWa8PQVLB7mAx19" alt="Después" />
+        <div class="ba-before-wrap" id="baBefore2">
+          <img src="https://drive.google.com/uc?export=view&id=1tdciWDYphq-ReIZ3bYzWXJHRizTrGnT_" alt="Antes" />
+        </div>
+        <div class="ba-divider" id="baDivider2">
+          <div class="ba-handle">
+            <svg viewBox="0 0 24 24"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+          </div>
+        </div>
+        <span class="ba-label ba-label-before">Antes</span>
+        <span class="ba-label ba-label-after">Después</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ─── EQUIPO ────────────────────────────────────────── -->
 <section id="equipo">
   <div class="section-header">
-    <span class="section-num">02</span>
+    <span class="section-num">03</span>
     <h2 class="section-title">Equipo</h2>
     <div class="section-line"></div>
   </div>
@@ -894,7 +1050,7 @@
 <!-- ─── CONTACTO ──────────────────────────────────────── -->
 <section id="contacto">
   <div class="section-header" style="margin-bottom: 3rem; padding: 0; border: none;">
-    <span class="section-num">03</span>
+    <span class="section-num">04</span>
     <h2 class="section-title">Contacto</h2>
     <div class="section-line"></div>
   </div>
@@ -940,6 +1096,29 @@
     const isOpen = mobileMenu.classList.toggle('open');
     toggle.classList.toggle('open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Before/After sliders
+  document.querySelectorAll('.ba-slider').forEach(slider => {
+    const beforeWrap = slider.querySelector('.ba-before-wrap');
+    const divider    = slider.querySelector('.ba-divider');
+    let dragging = false;
+
+    function setPos(clientX) {
+      const rect = slider.getBoundingClientRect();
+      let pct = Math.max(0, Math.min(100, (clientX - rect.left) / rect.width * 100));
+      beforeWrap.style.width = pct + '%';
+      divider.style.left     = pct + '%';
+    }
+
+    slider.addEventListener('mousedown',  e => { dragging = true; setPos(e.clientX); });
+    slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('mousemove',  e => { if (dragging) setPos(e.clientX); });
+    window.addEventListener('touchmove',  e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('mouseup',    () => dragging = false);
+    window.addEventListener('touchend',   () => dragging = false);
+
+    setPos(slider.getBoundingClientRect().left + slider.getBoundingClientRect().width / 2);
   });
 
   document.querySelectorAll('.nav-mobile-link').forEach(link => {
