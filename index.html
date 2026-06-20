@@ -607,6 +607,45 @@
       line-height: 1.2;
     }
 
+    .grid-row-project {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 4rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .grid-row-project-clips {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .grid-card-v-sm {
+      width: 200px;
+    }
+
+    .grid-card-v-sm .grid-card-v-video {
+      aspect-ratio: 9 / 16;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .grid-card-v-sm .grid-card-v-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .grid-row-project-info {
+      text-align: center;
+    }
+
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 1.25rem 1.5rem; }
@@ -751,24 +790,33 @@
     </div>
 
     <!-- 03 · Disorder AR -->
-    <div class="grid-card">
-      <a class="grid-card-thumb" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">
-        <span class="thumb-source">Carpeta de proyecto</span>
-        <div class="play-ring">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <div class="grid-row-project">
+      <div class="grid-row-project-clips">
+        <div class="grid-card-v-sm">
+          <div class="grid-card-v-video">
+            <iframe src="https://www.youtube.com/embed/eaIJHmQ7rEg" allowfullscreen loading="lazy"></iframe>
+          </div>
         </div>
-      </a>
-      <div class="grid-card-info">
-        <p class="grid-card-num">03 / 05</p>
-        <h3 class="grid-card-name">Cobertura Multicámara — Disorder AR</h3>
-        <div class="grid-card-tags">
+        <div class="grid-card-v-sm">
+          <div class="grid-card-v-video">
+            <iframe src="https://www.youtube.com/embed/Y-UprgsEAS8" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="grid-card-v-sm">
+          <div class="grid-card-v-video">
+            <iframe src="https://www.youtube.com/embed/gPh_XTB9SME" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="grid-row-project-info">
+        <p class="grid-card-v-num">03 / 05</p>
+        <h3 class="grid-card-v-name">Cobertura Multicámara — Disorder AR</h3>
+        <div class="grid-card-tags" style="justify-content: center;">
           <span class="tag">Cámara FOV</span>
           <span class="tag">Cámara en Cabina</span>
           <span class="tag">Edición</span>
           <span class="tag">Colorización</span>
         </div>
-        <p class="grid-card-desc">Cobertura audiovisual del evento de Disorder AR. Artista internacional: Airod Music (Francia). Montaje multicámara, edición y colorización final.</p>
-        <a class="grid-card-cta" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">Ver proyecto →</a>
       </div>
     </div>
 
