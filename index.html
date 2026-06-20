@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tomas Pucheta — Realizador Audiovisual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #101010;
+      --border: #1e1e1e;
+      --text: #ffffff;
+      --muted: #5a5a5a;
+      --muted-light: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(8, 8, 8, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 190;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .nav-mobile.open { display: flex; }
+
+    .nav-mobile a {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:hover { color: var(--muted-light); }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 3rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      writing-mode: vertical-rl;
+    }
+
+    .hero-scroll-hint::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: var(--border);
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted-light);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-size: clamp(4.5rem, 13vw, 11rem);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted-light);
+    }
+
+    .hero-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+
+    .hero-skills {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── SECTION BASE ────────────────────────────────── */
+    section {
+      padding: 6rem 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 5rem;
+    }
+
+    .section-num {
+      font-size: 0.65rem;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── PROJECTS ────────────────────────────────────── */
+    #trabajos { border-bottom: 1px solid var(--border); }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      padding: 4rem 0;
+    }
+
+    .project:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-media {
+      padding-right: 3rem;
+    }
+
+    .project:nth-child(even) .project-media {
+      order: 2;
+      padding-right: 0;
+      padding-left: 3rem;
+    }
+
+    .project:nth-child(even) .project-info {
+      order: 1;
+    }
+
+    .project-embed {
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .project-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .project-link-thumb {
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .project-link-thumb:hover { border-color: rgba(255,255,255,0.2); }
+
+    .project-link-thumb:hover .thumb-play { transform: scale(1.1); }
+
+    .thumb-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 0.3rem 0.6rem;
+      border: 1px solid var(--border);
+    }
+
+    .thumb-play {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .thumb-play svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+      margin-left: 3px;
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 3rem;
+    }
+
+    .project:nth-child(even) .project-info {
+      padding-left: 0;
+      padding-right: 3rem;
+    }
+
+    .project-num {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-name {
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      color: var(--muted-light);
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted-light);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 38ch;
+    }
+
+    .project-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      width: fit-content;
+    }
+
+    .project-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+
+    .project-cta:hover::after { background: var(--text); }
+
+    /* ─── EQUIPMENT ───────────────────────────────────── */
+    #equipo {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .equipment-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .equipment-table tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .equipment-table tr:hover { background: rgba(255,255,255,0.02); }
+
+    .equipment-table td {
+      padding: 1.1rem 0;
+      font-size: 0.85rem;
+    }
+
+    .equipment-table td:first-child {
+      color: var(--muted);
+      font-weight: 400;
+      width: 30%;
+    }
+
+    .equipment-table td:last-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    #contacto {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-heading {
+      font-size: clamp(3rem, 9vw, 8rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.92;
+      margin-bottom: 3.5rem;
+    }
+
+    .contact-sub {
+      font-size: 0.85rem;
+      color: var(--muted-light);
+      margin-bottom: 3rem;
+      max-width: 40ch;
+      line-height: 1.7;
+    }
+
+    .contact-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.9rem 1.75rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: rgba(255,255,255,0.88);
+      border-color: rgba(255,255,255,0.88);
+    }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      #hero { padding: 0 1.5rem 4.5rem; }
+
+      section { padding: 4rem 1.5rem; }
+
+      .project {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 0;
+      }
+
+      .project-media { padding-right: 0 !important; padding-left: 0 !important; }
+      .project:nth-child(even) .project-media { order: 1; }
+      .project:nth-child(even) .project-info { order: 2; }
+
+      .project-info { padding-left: 0 !important; padding-right: 0 !important; }
+
+      .project-desc { max-width: 100%; }
+
+      .equipment-table td:first-child { width: 40%; }
+
+      footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name { letter-spacing: -0.025em; }
+      .hero-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .hero-dot { display: none; }
+      .contact-btns { flex-direction: column; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Tomas Pucheta</a>
+  <ul class="nav-links">
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="navMobile">
+  <a href="#trabajos" class="nav-mobile-link">Trabajos</a>
+  <a href="#equipo" class="nav-mobile-link">Equipo</a>
+  <a href="#contacto" class="nav-mobile-link">Contacto</a>
+</div>
+
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<section id="hero">
+  <p class="hero-tagline">Historia. Movimiento. Emoción.</p>
+  <h1 class="hero-name">Tomas<br>Pucheta</h1>
+  <div class="hero-meta">
+    <span class="hero-subtitle">Realizador Audiovisual</span>
+    <span class="hero-dot"></span>
+    <span class="hero-skills">Dirección · Guionaje · Producción · Edición · Colorización</span>
+  </div>
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+
+<!-- ─── TRABAJOS ─────────────────────────────────────── -->
+<section id="trabajos">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Trabajos</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-list">
+
+    <!-- 01 · NPK -->
+    <div class="project">
+      <div class="project-media">
+        <div class="project-embed">
+          <iframe
+            src="https://drive.google.com/file/d/1qa7GuCGQbjytMh9bgvb7pvRTvBvDA4bT/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">01 / 06</p>
+        <h3 class="project-name">NPK — Video Institucional</h3>
+        <div class="project-tags">
+          <span class="tag">Producción Completa</span>
+          <span class="tag">Dirección</span>
+          <span class="tag">Edición</span>
+        </div>
+        <p class="project-desc">Video institucional para empresa cannabica NPK. Producción, dirección y edición completa.</p>
+      </div>
+    </div>
+
+    <!-- 02 · Videoclip Musical -->
+    <div class="project">
+      <div class="project-media">
+        <div class="project-embed">
+          <iframe
+            src="https://drive.google.com/file/d/13rHDU1pTnhM_8nC3DdICzOc8I8IcY02j/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">02 / 06</p>
+        <h3 class="project-name">Videoclip Musical · Artista de Córdoba</h3>
+        <div class="project-tags">
+          <span class="tag">Producción Completa</span>
+          <span class="tag">Grabación</span>
+          <span class="tag">Dirección</span>
+          <span class="tag">Edición</span>
+        </div>
+        <p class="project-desc">Producción audiovisual completa: preproducción, grabación en locación y edición final.</p>
+      </div>
+    </div>
+
+    <!-- 03 · Disorder AR -->
+    <div class="project">
+      <div class="project-media">
+        <a class="project-link-thumb" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">
+          <span class="thumb-label">Carpeta de proyecto</span>
+          <div class="thumb-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </a>
+      </div>
+      <div class="project-info">
+        <p class="project-num">03 / 06</p>
+        <h3 class="project-name">Cobertura Multicámara — Disorder AR</h3>
+        <div class="project-tags">
+          <span class="tag">Cámara FOV</span>
+          <span class="tag">Cámara en Cabina</span>
+          <span class="tag">Edición</span>
+          <span class="tag">Colorización</span>
+        </div>
+        <p class="project-desc">Cobertura audiovisual completa del evento de Disorder AR. Artista internacional: Airod Music (Francia). Montaje multicámara, edición y colorización final.</p>
+        <a class="project-cta" href="https://drive.google.com/drive/folders/1Rqk-oEWc2pLyFTZ8rCND9XixbIkMAi5z" target="_blank" rel="noopener">Ver proyecto →</a>
+      </div>
+    </div>
+
+    <!-- 04 · Recap & Colorización -->
+    <div class="project">
+      <div class="project-media">
+        <a class="project-link-thumb" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">
+          <span class="thumb-label">Instagram</span>
+          <div class="thumb-play">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </a>
+      </div>
+      <div class="project-info">
+        <p class="project-num">04 / 06</p>
+        <h3 class="project-name">Recap & Colorización</h3>
+        <div class="project-tags">
+          <span class="tag">Colorización</span>
+          <span class="tag">Edición</span>
+        </div>
+        <p class="project-desc">Recap del rodaje con trabajo de colorización cinematográfica.</p>
+        <a class="project-cta" href="https://www.instagram.com/p/DY5qhrrkUF5" target="_blank" rel="noopener">Ver en Instagram →</a>
+      </div>
+    </div>
+
+    <!-- 05 · Sanmaja Studio -->
+    <div class="project">
+      <div class="project-media">
+        <div class="project-embed">
+          <iframe
+            src="https://drive.google.com/file/d/1hwRqheGFUEHhA88phA4fJHX6gcmM82NU/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">05 / 06</p>
+        <h3 class="project-name">Proyecto Musical — Sanmaja Studio</h3>
+        <div class="project-tags">
+          <span class="tag">Producción</span>
+          <span class="tag">Dirección</span>
+          <span class="tag">Edición</span>
+        </div>
+        <p class="project-desc">Video musical grabado en locación y en Sanmaja Studio, Córdoba.</p>
+      </div>
+    </div>
+
+    <!-- 06 · NPK Tech -->
+    <div class="project">
+      <div class="project-media">
+        <div class="project-embed">
+          <iframe
+            src="https://drive.google.com/file/d/1cSuaC4moFdsIqhhrCSUw_DJCoqtEuESm/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      <div class="project-info">
+        <p class="project-num">06 / 06</p>
+        <h3 class="project-name">Video Institucional — NPK Tech</h3>
+        <div class="project-tags">
+          <span class="tag">Preproducción</span>
+          <span class="tag">Producción</span>
+          <span class="tag">Dirección</span>
+          <span class="tag">Montaje</span>
+          <span class="tag">Edición</span>
+          <span class="tag">Colorización</span>
+        </div>
+        <p class="project-desc">Pieza institucional para NPK Tech que presenta su nueva unidad de negocio: procesos, instalaciones y propuesta de valor. Producción completa desde la preproducción hasta la colorización final.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── EQUIPO ────────────────────────────────────────── -->
+<section id="equipo">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Equipo</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <table class="equipment-table">
+    <tbody>
+      <tr><td>Cámara</td><td>Sony Alpha 7 V</td></tr>
+      <tr><td>Óptica</td><td>Sony FE 24-70mm f/2.8 GM</td></tr>
+      <tr><td>Cage</td><td>SmallRig Rhinoceros</td></tr>
+      <tr><td>Matte Box</td><td>K&amp;F Concept</td></tr>
+      <tr><td>Monitor</td><td>Feelworld P6XL</td></tr>
+      <tr><td>Filtros</td><td>KOGJAERS 100mm / 79mm</td></tr>
+      <tr><td>Iluminación</td><td>SmallRig RF 05B · Lightdow · Soonpho RGB</td></tr>
+      <tr><td>Estabilizador</td><td>DJI Ronin RS 4 Pro</td></tr>
+      <tr><td>Trípode</td><td>K&amp;F Concept</td></tr>
+      <tr><td>Edición</td><td>MacBook Pro M4 Pro · DaVinci Resolve Studio</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ─── CONTACTO ──────────────────────────────────────── -->
+<section id="contacto">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Contacto</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <h2 class="contact-heading">Hablemos.</h2>
+  <p class="contact-sub">
+    Disponible para proyectos de marcas, eventos, videoclips y producción audiovisual.
+    Córdoba, Argentina.
+  </p>
+
+  <div class="contact-btns">
+    <a class="btn btn-primary" href="https://wa.me/543515504779" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a class="btn" href="mailto:tomaspuchetashop@gmail.com">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      Email
+    </a>
+    <a class="btn" href="https://www.instagram.com/_tomipucheta_" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @_tomipucheta_
+    </a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <span class="footer-text">© 2026 Tomas Pucheta</span>
+  <span class="footer-text">Córdoba, Argentina</span>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  const toggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('navMobile');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.nav-mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      toggle.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+</body>
+</html>
