@@ -787,6 +787,12 @@
       .color-process-info { padding: 1.5rem; }
     }
 
+    /* ─── CENTRADO REUTILIZABLE ───────────────────────── */
+    .project-center-wrap {
+      max-width: 50%;
+      margin: 0 auto;
+    }
+
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 1.25rem 1.5rem; }
@@ -796,20 +802,37 @@
       #hero { padding: 0 1.5rem 4rem; }
       .hero-scroll { display: none; }
 
-      .featured-label { padding: 1.5rem; }
-      .featured-meta { padding: 1.5rem; }
-      .section-header { padding: 1.5rem; }
+      .featured-label { padding: 1.25rem 1.5rem; }
+      .featured-meta { padding: 1.25rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .section-header { padding: 1.25rem 1.5rem; }
 
       .projects-grid { grid-template-columns: 1fr; }
       .grid-card { border-right: none; }
       .grid-card:nth-child(even) { border-right: none; }
       .grid-card-info { padding: 1.25rem 1.5rem; }
 
+      .project-center-wrap { max-width: 100%; }
+
+      .grid-row-vertical {
+        gap: 2rem;
+        padding: 2.5rem 1.5rem;
+        flex-direction: column;
+        align-items: center;
+      }
+      .grid-card-v { width: 100%; max-width: 420px; }
+
+      .grid-row-project { padding: 2.5rem 1.5rem; gap: 2rem; }
+      .grid-row-project-clips { gap: 1rem; }
+      .grid-card-v-sm { width: 45%; }
+
+      .color-process-grid { padding: 2rem 1.5rem; gap: 2rem; }
+      .color-process-info { padding: 1.25rem 1.5rem; }
+      .color-sliders-wrap { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+
       .equipment-table { padding: 1.5rem; }
       .equipment-table td:first-child { width: 40%; }
 
       #contacto { padding: 4rem 1.5rem; }
-
       footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
 
@@ -818,6 +841,9 @@
       .hero-dot { display: none; }
       .contact-btns { flex-direction: column; }
       .btn { justify-content: center; }
+      .grid-card-v-sm { width: 100%; max-width: 320px; }
+      .grid-row-project-clips { flex-direction: column; align-items: center; }
+      .equipment-table td { font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -968,12 +994,12 @@
 
     <!-- 04 · Sanmaja Studio -->
     <div class="grid-card" style="grid-column: 1 / -1; border-right: none;">
-      <div style="max-width: 50%; margin: 0 auto;">
+      <div class="project-center-wrap">
         <div class="grid-card-video">
           <iframe src="https://www.youtube.com/embed/ynw6FctIiww" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
-      <div class="grid-card-info" style="max-width: 50%; margin: 0 auto;">
+      <div class="grid-card-info" class="project-center-wrap">
         <p class="grid-card-num">04 / 04</p>
         <h3 class="grid-card-name">Proyecto Musical — Sanmaja Studio</h3>
         <div class="grid-card-tags">
