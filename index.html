@@ -63,16 +63,20 @@
     }
 
     .nav-links a {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted-light);
+      color: var(--text);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s, opacity 0.2s;
+      position: relative;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a::before { content: '['; margin-right: 0.35rem; }
+    .nav-links a::after { content: ']'; margin-left: 0.35rem; }
+
+    .nav-links a:hover { opacity: 0.6; }
 
     .nav-toggle {
       display: none;
@@ -111,16 +115,20 @@
     .nav-mobile.open { display: flex; }
 
     .nav-mobile a {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--text);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: opacity 0.2s;
+      position: relative;
     }
 
-    .nav-mobile a:hover { color: var(--muted-light); }
+    .nav-mobile a::before { content: '['; margin-right: 0.5rem; }
+    .nav-mobile a::after { content: ']'; margin-left: 0.5rem; }
+
+    .nav-mobile a:hover { opacity: 0.6; }
 
     /* ─── HERO ────────────────────────────────────────── */
     #hero {
