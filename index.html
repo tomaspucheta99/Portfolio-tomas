@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tomas Pucheta — Realizador Audiovisual</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #080808;
-      --surface: #101010;
-      --border: #1e1e1e;
-      --text: #ffffff;
-      --muted: #5a5a5a;
-      --muted-light: #888;
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --border: #e0e0e0;
+      --text: #000000;
+      --muted: #888888;
+      --muted-light: #aeaca8;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Spline Sans Mono', monospace;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
@@ -42,7 +42,7 @@
     }
 
     nav.scrolled {
-      background: rgba(8, 8, 8, 0.92);
+      background: rgba(245, 245, 245, 0.92);
       backdrop-filter: blur(16px);
       border-bottom-color: var(--border);
     }
@@ -340,9 +340,9 @@
       transition: background 0.3s;
     }
 
-    .grid-card-thumb:hover { background: #1a1a1a; }
+    .grid-card-thumb:hover { background: #f0f0f0; }
 
-    .grid-card-thumb:hover .play-ring { border-color: rgba(255,255,255,0.4); transform: scale(1.05); }
+    .grid-card-thumb:hover .play-ring { border-color: rgba(0,0,0,0.4); transform: scale(1.05); }
 
     .thumb-source {
       position: absolute;
@@ -360,7 +360,7 @@
     .play-ring {
       width: 52px;
       height: 52px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(0,0,0,0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -457,7 +457,7 @@
       transition: background 0.15s;
     }
 
-    .equipment-table tr:hover { background: rgba(255,255,255,0.02); }
+    .equipment-table tr:hover { background: rgba(0,0,0,0.02); }
 
     .equipment-table td {
       padding: 1rem 0;
@@ -523,19 +523,19 @@
     }
 
     .btn:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.25);
     }
 
     .btn-primary {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
+      background: #000;
+      color: #fff;
+      border-color: #000;
     }
 
     .btn-primary:hover {
-      background: rgba(255,255,255,0.88);
-      border-color: rgba(255,255,255,0.88);
+      background: rgba(0,0,0,0.88);
+      border-color: rgba(0,0,0,0.88);
     }
 
     .btn svg {
@@ -751,18 +751,18 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: white;
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
     }
 
     .ba-handle svg {
       width: 16px;
       height: 16px;
       fill: none;
-      stroke: #000;
+      stroke: #fff;
       stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
