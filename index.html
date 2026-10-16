@@ -1353,10 +1353,10 @@
   allVideos.forEach((video, index) => {
     video.style.cursor = 'pointer';
 
-    // Agregar elemento [PLAY] al hover
+    // Agregar elemento [PLAY] que sigue al cursor
     const playOverlay = document.createElement('div');
     playOverlay.innerHTML = '[PLAY]';
-    playOverlay.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:16px;font-weight:300;letter-spacing:2px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:100;font-family:monospace;';
+    playOverlay.style.cssText = 'position:absolute;color:#fff;font-size:16px;font-weight:300;letter-spacing:2px;opacity:0;pointer-events:none;z-index:100;font-family:monospace;white-space:nowrap;transition:opacity 0.3s ease;';
     video.parentElement.style.position = 'relative';
     video.parentElement.appendChild(playOverlay);
 
@@ -1366,6 +1366,15 @@
 
     video.parentElement.addEventListener('mouseleave', () => {
       playOverlay.style.opacity = '0';
+    });
+
+    video.parentElement.addEventListener('mousemove', (e) => {
+      const rect = video.parentElement.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      playOverlay.style.left = x + 'px';
+      playOverlay.style.top = y + 'px';
+      playOverlay.style.transform = 'translate(-50%, -50%)';
     });
 
     video.addEventListener('click', function(e) {
