@@ -1402,7 +1402,7 @@
         // Previous video preview
         if (vidIndex > 0) {
           const prevPreview = document.createElement('div');
-          prevPreview.style.cssText = 'position:fixed;top:50%;left:30px;transform:translateY(-50%);width:180px;height:100px;background:#000;border:1px solid #fff;cursor:pointer;z-index:10000;overflow:hidden;border-radius:4px;';
+          prevPreview.style.cssText = 'position:fixed;top:50%;left:15px;transform:translateY(-50%);width:120px;height:70px;background:#000;border:1px solid #fff;cursor:pointer;z-index:10000;overflow:hidden;border-radius:4px;';
           const prevVid = allVideos[vidIndex - 1].cloneNode(true);
           prevVid.muted = true;
           prevVid.autoplay = true;
@@ -1419,7 +1419,7 @@
         // Next video preview
         if (vidIndex < allVideos.length - 1) {
           const nextPreview = document.createElement('div');
-          nextPreview.style.cssText = 'position:fixed;top:50%;right:30px;transform:translateY(-50%);width:180px;height:100px;background:#000;border:1px solid #fff;cursor:pointer;z-index:10000;overflow:hidden;border-radius:4px;';
+          nextPreview.style.cssText = 'position:fixed;top:50%;right:15px;transform:translateY(-50%);width:120px;height:70px;background:#000;border:1px solid #fff;cursor:pointer;z-index:10000;overflow:hidden;border-radius:4px;';
           const nextVid = allVideos[vidIndex + 1].cloneNode(true);
           nextVid.muted = true;
           nextVid.autoplay = true;
