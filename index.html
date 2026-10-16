@@ -1348,33 +1348,75 @@
   });
 
   // Click en videos para reproducir con sonido en fullscreen
-  document.querySelectorAll('video').forEach(video => {
+  const allVideos = Array.from(document.querySelectorAll('video'));
+
+  allVideos.forEach((video, index) => {
     video.style.cursor = 'pointer';
     video.addEventListener('click', function(e) {
       e.stopPropagation();
-      const clone = this.cloneNode(true);
-      clone.muted = false;
-      clone.autoplay = true;
-      clone.controls = true;
-      clone.style.width = '100%';
-      clone.style.height = '100%';
 
-      const modal = document.createElement('div');
-      modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;';
-      modal.appendChild(clone);
+      function openVideo(vidIndex) {
+        const clone = allVideos[vidIndex].cloneNode(true);
+        clone.muted = false;
+        clone.autoplay = true;
+        clone.controls = true;
+        clone.style.width = '100%';
+        clone.style.height = '100%';
 
-      const closeBtn = document.createElement('button');
-      closeBtn.innerHTML = '✕';
-      closeBtn.style.cssText = 'position:fixed;top:30px;right:30px;background:none;border:none;font-size:32px;cursor:pointer;z-index:10000;color:#fff;padding:0;width:auto;height:auto;font-weight:300;letter-spacing:2px;';
-      closeBtn.addEventListener('click', () => modal.remove());
-      modal.appendChild(closeBtn);
+        const modal = document.createElement('div');
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;';
+        modal.appendChild(clone);
 
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
-      });
+        // Close button
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '✕';
+        closeBtn.style.cssText = 'position:fixed;top:30px;right:30px;background:none;border:none;font-size:32px;cursor:pointer;z-index:10000;color:#fff;padding:0;width:auto;height:auto;font-weight:300;letter-spacing:2px;';
+        closeBtn.addEventListener('click', () => modal.remove());
+        modal.appendChild(closeBtn);
 
-      document.body.appendChild(modal);
-      clone.requestFullscreen().catch(() => {});
+        // Previous video preview
+        if (vidIndex > 0) {
+          const prevPreview = document.createElement('div');
+          prevPreview.style.cssText = 'position:fixed;bottom:30px;left:30px;width:180px;height:100px;background:#000;border:1px solid #fff;cursor:pointer;z-index:10000;overflow:hidden;border-radius:4px;';
+          const prevVid = allVideos[vidIndex - 1].cloneNode(true);
+          prevVid.muted = true;
+          prevVid.autoplay = true;
+          prevVid.loop = true;
+          prevVid.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+          prevPreview.appendChild(prevVid);
+          prevPreview.addEventListener('click', () => {
+            modal.remove();
+            openVideo(vidIndex - 1);
+          });
+          modal.appendChild(prevPreview);
+        }
+
+        // Next video preview
+        if (vidIndex < allVideos.length - 1) {
+          const nextPreview = document.createElement('div');
+          nextPreview.style.cssText = 'position:fixed;bottom:30px;right:30px;width:180px;height:100px;background:#000;border:1px solid #fff;cursor:pointer;z-index:10000;overflow:hidden;border-radius:4px;';
+          const nextVid = allVideos[vidIndex + 1].cloneNode(true);
+          nextVid.muted = true;
+          nextVid.autoplay = true;
+          nextVid.loop = true;
+          nextVid.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+          nextPreview.appendChild(nextVid);
+          nextPreview.addEventListener('click', () => {
+            modal.remove();
+            openVideo(vidIndex + 1);
+          });
+          modal.appendChild(nextPreview);
+        }
+
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.remove();
+        });
+
+        document.body.appendChild(modal);
+        clone.requestFullscreen().catch(() => {});
+      }
+
+      openVideo(index);
     });
   });
 </script>
